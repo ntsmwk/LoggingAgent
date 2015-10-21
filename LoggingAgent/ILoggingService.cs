@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LoggingAgent
 {
-    class Program
+    interface ILoggingService
     {
-        static void Main(string[] args)
-        {
-        }
+        Task AddLog(LogEntry entry);
     }
 }
