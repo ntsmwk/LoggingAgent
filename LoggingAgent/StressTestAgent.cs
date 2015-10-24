@@ -1,43 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LoggingAgent
 {
-     class StressTestAgent
+    internal class StressTestAgent
     {
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
-            LogDBEntities1 _contextEntities = new LogDBEntities1();
-            _contextEntities.Configuration.AutoDetectChangesEnabled = false;
-            
-            _contextEntities.LogEntry.Add(new LogEntry
-                    {
-                        Message = "message",
-                        EventTime = new DateTime(),
-                        LogSource = "Source1",
-                        LogId = 2
-    });
-                int i = _contextEntities.SaveChanges();
-                Console.WriteLine("Count " + _contextEntities.LogEntry.Count());
-
-                /*
-                for (int i = 2; i < 10; i++)
+            LoggingAgent logging = new LoggingAgent();
+            Parallel.For(0, 100, (i) =>
+            {
+                new Task(() =>
                 {
-                    LogEntry l = new LogEntry
+                    
+                    int j = 0;
+                    for (;;)
                     {
-                        Message = "message" + i,
-                        EventTime = new DateTime(),
-                        LogSource = "Source1",
-                        LogId = i
-                    };
-                    new LoggingAgent().AddLog(l);
-                }
-                */
-                Console.ReadKey();
+                        
+                        LogEntry l = new LogEntry
+                        {
+                            Message = "message" + ++j,
+                            EventTime = DateTime.Now,
+                            LogSource = "Source" + i
+                        };
+                        logging.AddLog(l);
+                        Thread.Sleep(new Random().Next(10,500));
+                    }
+
+                }).Start();
+
+                Console.WriteLine("added Log Entry to queue" + i);
+            });
+             
+            Console.WriteLine("Finished!");
+            Console.ReadKey();
             return 0;
         }
     }

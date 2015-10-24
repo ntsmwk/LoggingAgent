@@ -4,34 +4,34 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LogDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LogEntryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LogEntry">
           <Key>
-            <PropertyRef Name="LogId" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="LogId" Type="int" Nullable="false" />
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="EventTime" Type="datetime" Nullable="false" />
+          <Property Name="EventTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="LogSource" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="LogDBModelStoreContainer">
+        <EntityContainer Name="LogEntryDBModelStoreContainer">
           <EntitySet Name="LogEntry" EntityType="Self.LogEntry" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LogDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LogEntryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="LogEntry">
           <Key>
-            <PropertyRef Name="LogId" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="LogId" Type="Int32" Nullable="false" />
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="LogSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="LogDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LogEntriesDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="LogEntry" EntityType="Self.LogEntry" />
         </EntityContainer>
       </Schema>
@@ -39,11 +39,11 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LogDBModelStoreContainer" CdmEntityContainer="LogDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="LogEntryDBModelStoreContainer" CdmEntityContainer="LogEntriesDBEntities">
           <EntitySetMapping Name="LogEntry">
-            <EntityTypeMapping TypeName="LogDBModel.LogEntry">
+            <EntityTypeMapping TypeName="LogEntryDBModel.LogEntry">
               <MappingFragment StoreEntitySet="LogEntry">
-                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="EventTime" ColumnName="EventTime" />
                 <ScalarProperty Name="LogSource" ColumnName="LogSource" />

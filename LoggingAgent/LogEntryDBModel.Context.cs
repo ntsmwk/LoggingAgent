@@ -13,10 +13,10 @@ namespace LoggingAgent
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LogDBEntities1 : DbContext
+    public partial class LogEntriesDBEntities : DbContext
     {
-        public LogDBEntities1()
-            : base("name=LogDBEntities1")
+        public LogEntriesDBEntities()
+            : base("name=LogEntriesDBEntities")
         {
         }
     

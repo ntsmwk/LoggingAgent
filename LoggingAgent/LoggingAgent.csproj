@@ -72,22 +72,22 @@
     <Compile Include="DbLogChannel.cs" />
     <Compile Include="ILoggingService.cs" />
     <Compile Include="LogEntry.cs">
-      <DependentUpon>LogEntryModel.tt</DependentUpon>
+      <DependentUpon>LogEntryDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LogEntryModel.Context.cs">
+    <Compile Include="LogEntryDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogEntryModel.Context.tt</DependentUpon>
+      <DependentUpon>LogEntryDBModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="LogEntryModel.cs">
+    <Compile Include="LogEntryDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogEntryModel.tt</DependentUpon>
+      <DependentUpon>LogEntryDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LogEntryModel.Designer.cs">
+    <Compile Include="LogEntryDBModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LogEntryModel.edmx</DependentUpon>
+      <DependentUpon>LogEntryDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="LoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,36 +95,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="LogEntryModel.edmx">
+    <EntityDeploy Include="LogEntryDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LogEntryModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>LogEntryDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="LogEntryModel.edmx.diagram">
-      <DependentUpon>LogEntryModel.edmx</DependentUpon>
+    <None Include="LogEntryDBModel.edmx.diagram">
+      <DependentUpon>LogEntryDBModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LogDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LogDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>LogDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="LogEntryModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LogEntryModel.edmx</DependentUpon>
-      <LastGenOutput>LogEntryModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="LogEntryModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LogEntryModel.edmx</DependentUpon>
-      <LastGenOutput>LogEntryModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -140,6 +121,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LogEntryDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogEntryDBModel.edmx</DependentUpon>
+      <LastGenOutput>LogEntryDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="LogEntryDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogEntryDBModel.edmx</DependentUpon>
+      <LastGenOutput>LogEntryDBModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,10 +9,11 @@ namespace LoggingAgent
 {
     class LoggingAgent : ILoggingService
     {
+        private DbLogChannel dbLogChannel = new DbLogChannel();
+
         public Task AddLog(LogEntry entry)
         {
-            Task dbLogWriteTask = new Task(() => DbLogChannel.Log(entry));
-            dbLogWriteTask.Start();
+            Task dbLogWriteTask = new TaskFactory().StartNew(() =>  dbLogChannel.Log(entry));
             return dbLogWriteTask;
         }
     }

@@ -14,7 +14,7 @@ namespace LoggingAgent
     
     public partial class LogEntry
     {
-        public int LogId { get; set; }
+        public int LogID { get; set; }
         public string Message { get; set; }
         public System.DateTime EventTime { get; set; }
         public string LogSource { get; set; }
