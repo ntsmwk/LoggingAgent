@@ -9,29 +9,23 @@ namespace LoggingAgent
     {
         private static int Main(string[] args)
         {
-            LoggingAgent logging = new LoggingAgent();
+            LoggingService loggingService = new LoggingService();
             Parallel.For(0, 100, (i) =>
             {
-                new Task(() =>
+                new TaskFactory().StartNew(async() =>
                 {
-                    
-                    int j = 0;
-                    for (;;)
+                    for (int j = 0;;j++)
                     {
-                        
                         LogEntry l = new LogEntry
                         {
-                            Message = "message" + ++j,
+                            Message = "message " + ++j,
                             EventTime = DateTime.Now,
-                            LogSource = "Source" + i
+                            LogSource = "source " + i
                         };
-                        logging.AddLog(l);
-                        Thread.Sleep(new Random().Next(10,500));
+                        await loggingService.AddLog(l);
+                        await Task.Delay(new Random().Next(10, 500));
                     }
-
-                }).Start();
-
-                Console.WriteLine("added Log Entry to queue" + i);
+                });
             });
              
             Console.WriteLine("Finished!");
